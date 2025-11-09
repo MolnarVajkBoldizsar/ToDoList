@@ -55,29 +55,6 @@ namespace ToDoList.Controllers
             return View(list);
         }
 
-        /*public async Task<IActionResult> Delete(int id)
-        {
-            var list = await _context.Lists.FirstOrDefaultAsync(x => x.Id == id);
-            return View(list);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var list = await _context.Lists.FindAsync(id);
-            if(list != null)
-            {
-                _context.Lists.Remove(list);
-                await _context.SaveChangesAsync();
-                
-            }
-            return RedirectToAction("Index", "Lists");
-
-        }*/
-
-        // Rename one of the Delete methods to resolve the CS0111 error.
-        // Here, the second Delete method is renamed to DeleteConfirmed to differentiate it.
-
         public async Task<IActionResult> Delete(int id)
         {
             var list = await _context.Lists.FindAsync(id);
