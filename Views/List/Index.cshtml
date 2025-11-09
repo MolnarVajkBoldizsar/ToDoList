@@ -1,0 +1,69 @@
+﻿@model List<ToDoList.Models.List>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Új elem hozzáadása</h3>
+<form asp-action="Create" method="post" class="mb-4">
+    <div class="form-group mb-2">
+        <input type="text" class="form-control" name="Name" placeholder="Név" required />
+    </div>
+    <div class="form-group mb-2">
+        <input type="date" class="form-control" name="Date" required />
+    </div>
+    <button type="submit" class="btn btn-success">Hozzáadás</button>
+</form>
+
+<h3>Lista</h3>
+
+<table class="table table-custom">
+    <thead>
+        <tr>
+            <th>Név</th>
+            <th>Dátum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var list in Model)
+        {
+            <tr>
+                <td>@list.Name</td>
+                <td>@list.Date</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@list.Id">Változtatás</a>
+                    <a asp-action="Delete" asp-route-id="@list.Id">Törlés</a> 
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script>
+        function validateInput(input) {
+            if (!input.value) {
+                input.classList.remove('input-valid');
+                input.classList.add('input-invalid');
+            } else {
+                input.classList.remove('input-invalid');
+                input.classList.add('input-valid');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var nameInput = document.querySelector('input[name="Name"]');
+            var dateInput = document.querySelector('input[name="Date"]');
+
+            [nameInput, dateInput].forEach(function(input) {
+                validateInput(input);
+                input.addEventListener('input', function() {
+                    validateInput(input);
+                });
+            });
+        });
+    </script>
+}
+

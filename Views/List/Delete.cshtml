@@ -1,0 +1,14 @@
+﻿@model ToDoList.Models.List
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Biztos ki akarod törölni a tevékenységet?</h3>
+
+<p>@Model.Name</p>
+<p>@Model.Date</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Törlés</button>
+</form>
